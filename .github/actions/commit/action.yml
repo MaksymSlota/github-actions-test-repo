@@ -14,10 +14,17 @@ runs:
   using: "composite"
   steps:
 
+  - name: Fix git safe directory
+    run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+
   - name: Bump version
     run: echo "NEW_VERSION=$(npm version ${{ github.event.inputs.version }})" >> $GITHUB_ENV
     shell: bash
 
-  - name: Commit
-    run: echo "${{ env.NEW_VERSION }}" >> $GITHUB_OUTPUT
-    shell: bash
+  - name: Commit and push version
+    run: |
+      git config user.name "github-actions[bot]"
+      git config user.email "github-actions[bot]@users.noreply.github.com"
+      git add package.json
+      git commit -m "[skip ci] Update package vault.wasm@${{ env.NEW_VERSION }}"
+      git push
