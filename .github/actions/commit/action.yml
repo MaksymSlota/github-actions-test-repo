@@ -16,6 +16,7 @@ runs:
 
   - name: Bump version
     run: echo "NEW_VERSION=$(npm version ${{ github.event.inputs.version }})" >> $GITHUB_ENV
+    shell: bash
 
   - name: Commit
     run: echo "${{ env.NEW_VERSION }}" >> $GITHUB_OUTPUT
