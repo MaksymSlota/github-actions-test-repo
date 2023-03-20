@@ -16,16 +16,17 @@ runs:
 
   - name: Fix git safe directory
     run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+    shell: bash
 
   - name: Bump version
     run: echo "NEW_VERSION=$(npm version ${{ github.event.inputs.version }})" >> $GITHUB_ENV
     shell: bash
 
   - name: Commit and push version
-    shell: bash
     run: |
       git config user.name "github-actions[bot]"
       git config user.email "github-actions[bot]@users.noreply.github.com"
       git add package.json
       git commit -m "[skip ci] Update package vault.wasm@${{ env.NEW_VERSION }}"
       git push
+    shell: bash
