@@ -22,6 +22,7 @@ runs:
     shell: bash
 
   - name: Commit and push version
+    shell: bash
     run: |
       git config user.name "github-actions[bot]"
       git config user.email "github-actions[bot]@users.noreply.github.com"
