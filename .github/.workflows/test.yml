@@ -1,0 +1,20 @@
+name: Deploy app
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Bump version (major | minor | patch)'
+        required: true
+        default: 'patch'
+
+jobs:
+  run-test-workflow:
+    name: Tets
+    steps:
+
+      - uses: actions/checkout@v2
+
+      - name: Run composite action
+        uses: ./.github/actions/commit
+        with:
+          version: ${{ github.event.inputs.version }}
