@@ -20,6 +20,6 @@ runs:
     run: echo "commit version ${{ github.event.inputs.version }}"
     shell: bash
   
-   - name: Echo arch
+  - name: Echo arch
     run: echo "arch: ${{ inputs.architecture }}"
     shell: bash
