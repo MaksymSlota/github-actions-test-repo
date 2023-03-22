@@ -19,6 +19,8 @@ runs:
 
   - name: Fix git safe directory
     run: echo "commit version ${{ github.event.inputs.version }}"
+    shell: bash
   
   - name: Echo arch
     run: echo "architecture param - ${{ github.event.inputs.architecture }}"
+    shell: bash
