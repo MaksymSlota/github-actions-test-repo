@@ -1,4 +1,4 @@
-name: Build all platforms
+name: Build all platforms deprecated
 on:
   workflow_dispatch:
 
