@@ -13,6 +13,10 @@ inputs:
     description: 'arch'
     required: true
 
+env:
+  ENV1: "ENV1"
+  ENV2: "ENV2"
+
 runs:
   using: "composite"
   steps:
@@ -22,4 +26,8 @@ runs:
   
   - name: Echo arch
     run: echo "architecture param - ${{ inputs.architecture }}"
+    shell: bash
+
+  - name: Echo ENVS
+    run: echo "ENVS- ${{ env.ENV1 }} -- ${{ env.ENV2 }}"
     shell: bash
