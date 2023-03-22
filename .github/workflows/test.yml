@@ -20,11 +20,7 @@ jobs:
     - uses: actions/checkout@v3
 
     - name: Run composite action
-      uses: ./.github/actions/composite/action1.yml
+      uses: ./.github/actions/commit
       with:
         version: ${{ github.event.inputs.version }}
-
-    - name: Run composite action 2
-      uses: ./.github/actions/composite/action2.yml
-      with:
         architecture: ${{ matrix.arch }}

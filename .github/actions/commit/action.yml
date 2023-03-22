@@ -9,10 +9,17 @@ inputs:
   version:
     description: 'version'
     required: true
+  architecture:
+    description: 'arch'
+    required: true
 
 runs:
   using: "composite"
   steps:
   - name: Fix git safe directory
     run: echo "commit version ${{ inputs.version }}"
+    shell: bash
+  
+  - name: Echo arch
+    run: echo "architecture param - ${{ inputs.architecture }}"
     shell: bash
