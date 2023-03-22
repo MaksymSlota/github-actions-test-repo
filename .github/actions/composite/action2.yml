@@ -1,0 +1,14 @@
+name: 'CommitHelper'
+description: 'Echo arch'
+
+inputs:
+  architecture:
+    description: 'arch'
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+  - name: Echo arch
+    run: echo "architecture param - ${{ inputs.architecture }}"
+    shell: bash
