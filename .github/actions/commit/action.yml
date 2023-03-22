@@ -2,24 +2,30 @@ name: 'CommitHelper'
 description: 'Commit new version'
 
 inputs:
-  package-name:
-    description: 'Package name (same as working derictory)'
-    required: false
-    default: 'vault-wasm'
   version:
     description: 'version'
     required: true
   architecture:
+    description: 'arch'
     required: true
+
 
 runs:
   using: "composite"
-  steps:
 
+  env:
+    ENV1: "ENV1"
+    ENV2: "ENV2"
+
+  steps:
   - name: Fix git safe directory
-    run: echo "commit version ${{ github.event.inputs.version }}"
+    run: echo "commit version ${{ inputs.version }}"
     shell: bash
   
-   - name: Echo arch
-    run: echo "arch: ${{ inputs.architecture }}"
+  - name: Echo arch
+    run: echo "architecture param - ${{ inputs.architecture }}"
+    shell: bash
+
+  - name: Echo ENVS
+    run: echo "ENVS -- ${{ env.ENV1 }} -- ${{ env.ENV2 }}"
     shell: bash
