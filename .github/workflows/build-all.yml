@@ -5,12 +5,12 @@ on:
 jobs:
   
   build-desktop:
-    uses: ./.github/reusable-workflows/build-desktop.yml
+    uses: ./.github/workflows/build-desktop.yml
     with:
       env: 'tz2'
 
   build-wasm:
-    uses: ./.github/reusable-workflows/build-wasm.yml
+    uses: ./.github/workflows/build-wasm.yml
     with:
       env: 'prod'
   
