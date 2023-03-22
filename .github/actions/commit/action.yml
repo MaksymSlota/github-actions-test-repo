@@ -11,7 +11,6 @@ inputs:
     required: true
   architecture:
     description: 'arch'
-    type: string
     required: true
 
 runs:
@@ -20,8 +19,6 @@ runs:
 
   - name: Fix git safe directory
     run: echo "commit version ${{ github.event.inputs.version }}"
-    shell: bash
   
   - name: Echo arch
-    run: echo "arch ${{ github.event.inputs.architecture }}"
-    shell: bash
+    run: echo "architecture param - ${{ github.event.inputs.architecture }}"

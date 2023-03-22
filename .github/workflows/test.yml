@@ -17,6 +17,10 @@ jobs:
     strategy:
       matrix:
         arch: [armeabi-v7a, arm64-v8a, x86]
+        
+    defaults:
+      run:
+        shell: bash
 
     steps:
     - uses: actions/checkout@v3
