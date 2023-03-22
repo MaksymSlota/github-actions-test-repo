@@ -9,10 +9,8 @@ on:
 
 jobs:
   run-test-workflow:
-    name: Tets
-
-    runs-on:
-    - ubuntu-latest
+    name: Test
+    runs-on: ubuntu-latest
 
     strategy:
       matrix:
