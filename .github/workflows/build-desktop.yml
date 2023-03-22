@@ -22,8 +22,9 @@ jobs:
     - name: "Run desktop echo"
       run: echo "Hello from desktop workflow"
 
-    - name: Run composite action
-      uses: ./.github/actions/commit
-      with:
-        version: ${{ inputs.env }}
-        architecture: ${{ matrix.arch }}
+
+    # - name: Run composite action
+    #   uses: ./.github/actions/commit
+    #   with:
+    #     version: ${{ inputs.env }}
+    #     architecture: ${{ matrix.arch }}
