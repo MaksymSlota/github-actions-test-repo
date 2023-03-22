@@ -22,5 +22,5 @@ runs:
     shell: bash
   
   - name: Echo arch
-    run: echo "arch: ${{ github.event.inputs.architecture }}"
+    run: echo "arch ${{ github.event.inputs.architecture }}"
     shell: bash

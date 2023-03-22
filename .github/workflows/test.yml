@@ -25,4 +25,4 @@ jobs:
       uses: ./.github/actions/commit
       with:
         version: ${{ github.event.inputs.version }}
-        architecture: '${{ matrix.arch }}'
+        architecture: ${{ matrix.arch }}
