@@ -25,6 +25,8 @@ jobs:
 
     - name: Run composite action
       uses: ./.github/actions/echo
+      with:
+        build-example-app: false
 
     # - name: Run composite action
     #   uses: ./.github/actions/commit
