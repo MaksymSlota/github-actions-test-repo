@@ -9,6 +9,8 @@ inputs:
   version:
     description: 'version'
     required: true
+  architecture:
+    required: true
 
 runs:
   using: "composite"
@@ -16,4 +18,8 @@ runs:
 
   - name: Fix git safe directory
     run: echo "commit version ${{ github.event.inputs.version }}"
+    shell: bash
+  
+   - name: Echo arch
+    run: echo "arch: ${{ inputs.architecture }}"
     shell: bash
