@@ -1,0 +1,29 @@
+name: Build Desktop
+
+on:
+  workflow_call:
+    inputs:
+      env:
+        required: true
+        type: string
+
+jobs:
+    
+  build:
+    name: Build desktop
+    runs-on: ubuntu-latest
+    strategy:
+        matrix:
+          arch: ['x64', 'x86']
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: "Run desktop echo"
+      run: echo "Hello from desktop workflow"
+
+    - name: Run composite action
+      uses: ./.github/actions/commit
+      with:
+        version: ${{ inputs.env }}
+        architecture: ${{ matrix.arch }}

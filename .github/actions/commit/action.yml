@@ -2,10 +2,6 @@ name: 'CommitHelper'
 description: 'Commit new version'
 
 inputs:
-  package-name:
-    description: 'Package name (same as working derictory)'
-    required: false
-    default: 'vault-wasm'
   version:
     description: 'version'
     required: true
