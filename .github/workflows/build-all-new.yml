@@ -1,0 +1,23 @@
+name: Build all platforms new
+on:
+  workflow_dispatch:
+
+jobs:
+  
+  build-desktop:
+    uses: ./.github/workflows/build-desktop.yml
+    with:
+      env: 'tz2'
+
+  build-wasm:
+    uses: ./.github/workflows/build-wasm.yml
+    with:
+      env: 'prod'
+  
+  custom-job:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - run: echo "custom job"
