@@ -19,8 +19,11 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: Run composite action
-      uses: ./.github/actions/commit
-      with:
-        version: ${{ inputs.env }}
-        architecture: ${{ matrix.arch }}
+    - name: "Run desktop echo"
+      run: echo "Hello from wasm workflow"
+
+    # - name: Run composite action
+    #   uses: ./.github/actions/commit
+    #   with:
+    #     version: ${{ inputs.env }}
+    #     architecture: ${{ matrix.arch }}
