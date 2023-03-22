@@ -16,7 +16,7 @@ jobs:
 
     strategy:
       matrix:
-        arch: [armeabi-v7a, arm64-v8a, x86, x86_64]
+        arch: [armeabi-v7a, arm64-v8a, x86]
 
     steps:
     - uses: actions/checkout@v3

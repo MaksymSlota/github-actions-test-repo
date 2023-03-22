@@ -11,6 +11,7 @@ inputs:
     required: true
   architecture:
     description: 'arch'
+    type: string
     required: true
 
 runs:
