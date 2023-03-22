@@ -22,7 +22,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Run composite action
-        uses: /actions/commit
+        uses: ./.github/actions/commit
         with:
           version: ${{ github.event.inputs.version }}
           architecture: ${{ matrix.arch }}
