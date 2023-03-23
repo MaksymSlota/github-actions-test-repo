@@ -6,11 +6,7 @@ inputs:
   package-name:
     reqired: true
   version:
-    options: 
-        - patch
-        - minor
-        - major
-        - alpha
+    description: 'Bump version (major | minor | patch | alpha)'
     required: true
     default: 'patch'
 
