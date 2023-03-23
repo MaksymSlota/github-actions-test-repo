@@ -28,6 +28,6 @@ jobs:
     - name: Commit new version
       uses: ./.github/actions/git-helper
       with:
-        working-directory: "rn"
-        package-name: "vault.rn"
-        version: "alpha"
+        working-directory: rn
+        package-name: vault.rn
+        version: alpha
