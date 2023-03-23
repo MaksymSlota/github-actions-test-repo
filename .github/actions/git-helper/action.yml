@@ -16,12 +16,14 @@ runs:
 
   - name: "echo test"
     run: "echo commit"
+    shell: bash
 
-  #  - name: Bump version
-  #     working-directory: js
-  #     #if: inputs.version != 'alpha'
-  #     run: |
-  #       echo "NEW_VERSION=$(npm version ${{ inputs.version }})" >> $GITHUB_ENV
+  - name: Bump version
+    shell: bash
+    working-directory: js
+    if: inputs.version != 'alpha'
+    run: |
+      echo "NEW_VERSION=$(npm version ${{ inputs.version }})" >> $GITHUB_ENV
 
     # - name: Bump alpha version
     #   working-directory: js
