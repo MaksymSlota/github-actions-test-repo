@@ -14,32 +14,30 @@ runs:
   using: "composite"
   steps:
 
-  - name: "echo test"
-    run: "echo commit"
-    shell: bash
-
   - name: Bump version
     shell: bash
-    working-directory: js
+    working-directory: ${{ inputs.working-directory }}
     if: inputs.version != 'alpha'
     run: |
       echo "NEW_VERSION=$(npm version ${{ inputs.version }})" >> $GITHUB_ENV
 
-    # - name: Bump alpha version
-    #   working-directory: js
-    #   #if: inputs.version == 'alpha'
-    #   run: |
-    #     echo "NEW_VERSION=$(npm version prerelease --preid=alpha)" >> $GITHUB_ENV
+  - name: Bump alpha version
+    shell: bash
+    working-directory: ${{ inputs.working-directory }}
+    if: inputs.version == 'alpha'
+    run: |
+      echo "NEW_VERSION=$(npm version prerelease --preid=alpha)" >> $GITHUB_ENV
 
-    # - name: Commit and push version
-    #   working-directory: js
-    #   run: |
-    #     git pull
-    #     git config user.name "github-actions[bot]"
-    #     git config user.email "github-actions[bot]@users.noreply.github.com"
-    #     git add package.json
-    #     git add package-lock.json
-    #     git commit -m "[skip ci] Update SDK beta package ${{ inputs.package-name }}@${{ env.NEW_VERSION }}"
-    #     git push
-    #     git tag ${{ inputs.package-name }}/${{ env.NEW_VERSION }}
-    #     git push --tags
+  - name: Commit and push version
+    shell: bash
+    working-directory: ${{ inputs.working-directory }}
+    run: |
+      git pull
+      git config user.name "github-actions[bot]"
+      git config user.email "github-actions[bot]@users.noreply.github.com"
+      git add package.json
+      git add package-lock.json
+      git commit -m "[skip ci] Update SDK beta package ${{ inputs.package-name }}@${{ env.NEW_VERSION }}"
+      git push
+      git tag ${{ inputs.package-name }}/${{ env.NEW_VERSION }}
+      git push --tags
