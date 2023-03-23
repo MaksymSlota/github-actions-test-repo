@@ -1,6 +1,6 @@
 {
   "name": "vault.wasm",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Vault WebAssembly test example",
   "main": "index.js",
   "scripts": {

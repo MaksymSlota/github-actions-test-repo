@@ -1,6 +1,6 @@
 {
   "name": "vault.rn",
-  "version": "1.0.0",
+  "version": "1.0.1-alpha.1",
   "description": "Vault React Native test example",
   "main": "index.js",
   "scripts": {
