@@ -2,6 +2,11 @@ name: Build all platforms new renamed - 2
 
 on:
   workflow_dispatch:
+    inputs:
+      version:
+        description: 'Bump version (major | minor | patch | alpha)'
+        required: true
+        default: 'patch'
 
 jobs:
   
