@@ -1,4 +1,4 @@
-name: Build all platforms new
+name: Build all platforms new renamed
 on:
   workflow_dispatch:
 
