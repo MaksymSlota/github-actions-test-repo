@@ -25,8 +25,9 @@ jobs:
     - name: Run composite action
       uses: ./.github/actions/echo
 
-    # - name: Run composite action
-    #   uses: ./.github/actions/commit
-    #   with:
-    #     version: ${{ inputs.env }}
-    #     architecture: ${{ matrix.arch }}
+    - name: Commit new version
+      uses: ./.github/actions/git-helper
+      with:
+        working-directory: "rn"
+        package-name: "vault.rn"
+        version: "alpha"

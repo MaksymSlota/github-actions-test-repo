@@ -19,7 +19,6 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-
     - name: "Run desktop echo"
       run: echo "Hello from wasm workflow"
 
@@ -27,9 +26,10 @@ jobs:
       uses: ./.github/actions/echo
       with:
         build-example-app: false
-
-    # - name: Run composite action
-    #   uses: ./.github/actions/commit
-    #   with:
-    #     version: ${{ inputs.env }}
-    #     architecture: ${{ matrix.arch }}
+        
+    - name: Commit new version
+      uses: ./.github/actions/git-helper
+      with:
+        working-directory: js
+        package-name: vault.wasm
+        version: patch

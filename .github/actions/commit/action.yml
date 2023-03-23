@@ -9,7 +9,6 @@ inputs:
     description: 'arch'
     required: true
 
-
 runs:
   using: "composite"
 
