@@ -2,12 +2,15 @@ name: 'Git helper composite action'
 
 inputs:
   working-directory:
+    type: string
     required: true
   package-name:
+    type: string
     reqired: true
   version:
     description: 'Bump version (major | minor | patch | alpha)'
     required: true
+    type: string
     default: 'patch'
 
 runs:
@@ -15,19 +18,19 @@ runs:
   steps:
 
    - name: Bump version
-      working-directory: ${{ input.working-directory }}
+      working-directory: ${{ inputs.working-directory }}
       if: inputs.version != 'alpha'
       run: |
         echo "NEW_VERSION=$(npm version ${{ inputs.version }})" >> $GITHUB_ENV
 
     - name: Bump alpha version
-      working-directory: ${{ input.working-directory }}
+      working-directory: ${{ inputs.working-directory }}
       if: inputs.version == 'alpha'
       run: |
         echo "NEW_VERSION=$(npm version prerelease --preid=alpha)" >> $GITHUB_ENV
 
     - name: Commit and push version
-      working-directory: ${{ input.working-directory }}
+      working-directory: ${{ inputs.working-directory }}
       run: |
         git pull
         git config user.name "github-actions[bot]"
