@@ -15,19 +15,19 @@ runs:
   steps:
 
    - name: Bump version
-      working-directory: ${{ inputs.working-directory }}
+      working-directory: js
       if: inputs.version != 'alpha'
       run: |
         echo "NEW_VERSION=$(npm version ${{ inputs.version }})" >> $GITHUB_ENV
 
     - name: Bump alpha version
-      working-directory: ${{ inputs.working-directory }}
+      working-directory: js
       if: inputs.version == 'alpha'
       run: |
         echo "NEW_VERSION=$(npm version prerelease --preid=alpha)" >> $GITHUB_ENV
 
     - name: Commit and push version
-      working-directory: ${{ inputs.working-directory }}
+      working-directory: js
       run: |
         git pull
         git config user.name "github-actions[bot]"
