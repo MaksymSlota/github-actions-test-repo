@@ -30,6 +30,6 @@ jobs:
     - name: Commit new version
       uses: ./.github/actions/git-helper
       with:
-        working-directory: 'js'
-        package-name: 'vault.wasm'
-        version: 'patch'
+        working-directory: js
+        package-name: vault.wasm
+        version: patch
