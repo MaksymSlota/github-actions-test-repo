@@ -2,15 +2,12 @@ name: 'Git helper composite action'
 
 inputs:
   working-directory:
-    type: string
     required: true
   package-name:
-    type: string
     reqired: true
   version:
     description: 'Bump version (major | minor | patch | alpha)'
     required: true
-    type: string
     default: 'patch'
 
 runs:
