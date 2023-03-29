@@ -1,12 +1,13 @@
 name: Deploy
 
 on:
-    workflow_dispatch:
-        inputs:
-            version:
-                description: 'Bump version (major | minor | patch)'
-                required: true
-                default: 'patch'
+  workflow_call:
+    inputs:
+      version:
+        description: 'Bump version (major | minor | patch)'
+        required: true
+        default: 'patch'
+        type: string
 
 jobs:
   check:
