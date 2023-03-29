@@ -3,6 +3,7 @@
  * https://jestjs.io/docs/configuration
  */
 
+// eslint-disable-next-line no-undef
 module.exports = {
   // All imported modules in your tests should be mocked automatically
   // automock: false,
@@ -11,7 +12,7 @@ module.exports = {
   // bail: 0,
 
   // The directory where Jest should store its cached dependency information
-  // cacheDirectory: "/private/var/folders/r3/qb_tnw8j37gfb9lx6trqty3h0000gn/T/jest_dx",
+  // cacheDirectory: "/private/var/folders/yk/kf7dbcln19v06lsbj84_v_240000gn/T/jest_dx",
 
   // Automatically clear mock calls, instances, contexts and results before every test
   // clearMocks: false,
@@ -31,7 +32,7 @@ module.exports = {
   // ],
 
   // Indicates which provider should be used to instrument code for coverage
-  coverageProvider: "babel",
+  coverageProvider: "v8",
 
   // A list of reporter names that Jest uses when writing coverage reports
   // coverageReporters: [

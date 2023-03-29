@@ -1,13 +1,14 @@
 {
-  "name": "github-actions-test-repo",
+  "name": "@maksymslota/github-actions-test-repo",
   "version": "1.0.0",
   "description": "Repo to test github actions",
   "main": "dist/index.js",
-  "type": "module",
+  "type": "commonjs",
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "test": "jest"
+    "test": "jest",
+    "lint": "eslint . && tsc --pretty --noEmit"
   },
   "repository": {
     "type": "git",
@@ -26,6 +27,12 @@
     "package.json"
   ],
   "devDependencies": {
+    "@types/jest": "^29.5.0",
+    "@typescript-eslint/eslint-plugin": "^5.57.0",
+    "@typescript-eslint/parser": "^5.57.0",
+    "eslint": "^8.37.0",
+    "jest": "^29.5.0",
+    "ts-jest": "^29.0.5",
     "typescript": "^5.0.2"
   }
 }

@@ -1,0 +1,24 @@
+name: Style
+
+on:
+    workflow_call:
+
+jobs:
+  check:
+    runs-on:
+    - ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Install dependencies
+      working-directory: js
+      run: npm ci
+
+    - name: Check cpp style
+      run: find . -iname *.cpp -o -iname *.hpp | xargs clang-format --style=file --dry-run -Werror
+
+    - name: Check js style
+      working-directory: js
+      run: npm run lint

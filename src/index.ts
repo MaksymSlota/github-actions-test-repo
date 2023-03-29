@@ -9,7 +9,7 @@ export default dig;
  * @param {boolean} [shouldThrow=false] - Optionally throw an exception when nothing found
  *
  */
-function dig(source: any, path: string, shouldThrow: boolean = false) {
+function dig(source: any, path: string, shouldThrow = false) {
   if (source === null || source === undefined) {
     return undefined;
   }
