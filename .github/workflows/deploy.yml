@@ -27,13 +27,10 @@ jobs:
         git config user.name "github-actions[bot]"
         git config user.email "github-actions[bot]@users.noreply.github.com"
 
-    - name: Bump version
-      run: |
-          echo "NEW_VERSION=$(npm version ${{ inputs.version }})" >> $GITHUB_ENV
-
     - name: Commit and push version
       run: |
         git pull
+        echo "NEW_VERSION=$(npm version ${{ inputs.version }})" >> $GITHUB_ENV
         git add package*.json
         git commit -m "[skip ci] Update package github-actions-test-repo@${{ env.NEW_VERSION }}"
         git push
