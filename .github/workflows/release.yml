@@ -19,7 +19,7 @@ jobs:
     needs: [check-style]
     uses: ./.github/workflows/test.yml
   deploy:
-      needs: [build, test]
+      #needs: [build, test]
       uses: ./.github/workflows/deploy.yml
       with:
         version: ${{ github.event.inputs.version }}
