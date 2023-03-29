@@ -1,19 +1,31 @@
 {
-  "name": "vault.test",
-  "version": "1.0.1",
-  "description": "Vault WebAssembly test example",
-  "main": "index.js",
+  "name": "github-actions-test-repo",
+  "version": "1.0.0",
+  "description": "Repo to test github actions",
+  "main": "dist/index.js",
+  "type": "module",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/MaksymSlota/github-actions-test-repo.git"
   },
-  "author": "MaksymSlota",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/MaksymSlota/github-actions-test-repo/issues"
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/maksymslota"
   },
-  "homepage": "https://github.com/MaksymSlota/github-actions-test-repo#readme"
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "files": [
+    "dist",
+    "LICENSE",
+    "README.md",
+    "package.json"
+  ],
+  "devDependencies": {
+    "typescript": "^5.0.2"
+  }
 }
