@@ -31,7 +31,8 @@ jobs:
       run: |
         git pull
         echo "NEW_VERSION=$(npm version ${{ inputs.version }})" >> $GITHUB_ENV
-        git add package*.json
+        git add package.json
+        git add package-lock.json
         git commit -m "[skip ci] Update package github-actions-test-repo@${{ env.NEW_VERSION }}"
         git push
         git tag github-actions-test-repo/${{ env.NEW_VERSION }}
