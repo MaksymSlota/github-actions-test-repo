@@ -1,19 +1,38 @@
 {
-  "name": "vault.test",
-  "version": "1.0.1",
-  "description": "Vault WebAssembly test example",
-  "main": "index.js",
+  "name": "@maksymslota/github-actions-test-repo",
+  "version": "1.0.0",
+  "description": "Repo to test github actions",
+  "main": "dist/index.js",
+  "type": "commonjs",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc",
+    "test": "jest",
+    "lint": "eslint . && tsc --pretty --noEmit"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/MaksymSlota/github-actions-test-repo.git"
   },
-  "author": "MaksymSlota",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/MaksymSlota/github-actions-test-repo/issues"
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/maksymslota"
   },
-  "homepage": "https://github.com/MaksymSlota/github-actions-test-repo#readme"
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "files": [
+    "dist",
+    "LICENSE",
+    "README.md",
+    "package.json"
+  ],
+  "devDependencies": {
+    "@types/jest": "^29.5.0",
+    "@typescript-eslint/eslint-plugin": "^5.57.0",
+    "@typescript-eslint/parser": "^5.57.0",
+    "eslint": "^8.37.0",
+    "jest": "^29.5.0",
+    "ts-jest": "^29.0.5",
+    "typescript": "^5.0.2"
+  }
 }

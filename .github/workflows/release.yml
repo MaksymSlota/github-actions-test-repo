@@ -1,0 +1,26 @@
+name: Deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Bump version (major | minor | patch)'
+        required: true
+        default: 'patch'
+        type: string
+
+jobs:
+  check-style:
+    uses: ./.github/workflows/lint.yml
+  build:
+    needs: [check-style]
+    uses: ./.github/workflows/build.yml
+  test:
+    needs: [check-style]
+    uses: ./.github/workflows/test.yml
+  deploy:
+      needs: [build, test]
+      uses: ./.github/workflows/deploy.yml
+      with:
+        version: ${{ github.event.inputs.version }}
+      
