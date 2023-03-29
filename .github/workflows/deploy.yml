@@ -23,7 +23,8 @@ jobs:
       run: npm run build
     
     - name: Bump version
-      run: echo "NEW_VERSION=$(npm version ${{ inputs.version }})" >> $GITHUB_ENV
+      run: |
+        echo "NEW_VERSION=$(npm version ${{ inputs.version }})" >> $GITHUB_ENV
 
     - name: Commit and push version
       run: |
