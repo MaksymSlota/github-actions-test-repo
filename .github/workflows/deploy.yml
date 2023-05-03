@@ -10,7 +10,7 @@ on:
         type: string
 
 jobs:
-  check:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -22,9 +22,24 @@ jobs:
     - name: Build
       run: npm run build
     
-    - name: Bump version
+    - name: Config git user
       run: |
-        echo "NEW_VERSION=$(npm version ${{ github.event.inputs.version }})" >> $GITHUB_ENV
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
 
     - name: Commit and push version
-      run: echo "NewVersion = ${{ env.NEW_VERSION }}"
+      run: |
+        git pull
+        echo "NEW_VERSION=$(npm version ${{ inputs.version }})" >> $GITHUB_ENV
+        git add package.json
+        git add package-lock.json
+        git commit -m "[skip ci] Update package github-actions-test-repo@${{ env.NEW_VERSION }}"
+        git push
+        git tag github-actions-test-repo/${{ env.NEW_VERSION }}
+        git push --tags
+
+    - name: Publish npm package
+      env:
+        NPM_CONFIG_USERCONFIG: .npmrc.ci
+        NODE_AUTH_TOKEN: ${{ github.token }}
+      run: npm publish --no-git-tag-version
