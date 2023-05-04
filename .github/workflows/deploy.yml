@@ -29,13 +29,11 @@ jobs:
     
     - name: update version
       run: |
-        echo ${{ inputs.version }}
-        echo "NEW_VERSION=$(npm version ${{ inputs.version }})" >> $GITHUB_ENV
-        echo ${{ env.NEW_VERSION }}
+        npm version ${{ inputs.version }}
 
-    - name: Commit and push new version
+    - name: Push new version
       run: |
-        git tag github-actions-test-repo/${{ env.NEW_VERSION }}
+        git push
         git push --tags
 
     - name: Publish npm package
