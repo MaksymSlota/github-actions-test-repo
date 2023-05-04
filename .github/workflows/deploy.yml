@@ -27,26 +27,17 @@ jobs:
         git config user.name "github-actions[bot]"
         git config user.email "github-actions[bot]@users.noreply.github.com"
     
-    - name: Set the value
-      id: step_one
-      run: echo "action_state=yellow" >> $GITHUB_ENV
-
-    - name: Use the value
-      id: step_two
-      run: echo "${{ env.action_state }}"
-
     - name: update version
       run: |
         echo ${{ inputs.version }}
         echo "NEW_VERSION=$(npm version ${{ inputs.version }})" >> $GITHUB_ENV
         echo ${{ env.NEW_VERSION }}
 
-    # - name: Commit and push version
-    #   run: |
-    #     git add package.json
-    #     git add package-lock.json
-    #     git commit -m "[skip ci] Update package github-actions-test-repo@${{ env.NEW_VERSION }}"
-    #     git push
+    - name: Commit and push version
+      run: |
+        git add package*.json
+        git commit -m "[skip ci] Update package github-actions-test-repo@${{ env.NEW_VERSION }}"
+        git push
         
     - name: Commit and push new tag
       run: |
