@@ -24,7 +24,9 @@ jobs:
     
     - name: update version
       run: |
+        echo ${{ inputs.version }}
         echo "NEW_VERSION=$(npm version ${{ inputs.version }})" >> $GITHUB_ENV
+        echo ${{ env.NEW_VERSION }}
 
     - name: Config git user
       run: |
