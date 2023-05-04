@@ -37,10 +37,6 @@ jobs:
       run: |
         git add package*.json
         git commit -m "[skip ci] Update package github-actions-test-repo@${{ env.NEW_VERSION }}"
-        git push
-        
-    - name: Commit and push new tag
-      run: |
         git tag github-actions-test-repo/${{ env.NEW_VERSION }}
         git push --tags
 
