@@ -21,23 +21,30 @@ jobs:
 
     - name: Build
       run: npm run build
-    
-    - name: Config git user
-      run: |
-        git config user.name "github-actions[bot]"
-        git config user.email "github-actions[bot]@users.noreply.github.com"
-    
-    - name: update version
-      run: |
-        npm version ${{ inputs.version }}
 
-    - name: Push new version
-      run: |
-        git push
-        git push --tags
+    - name: Commit and publish new version
+      uses: ./.github/actions/git-helper
+      with:
+        working-directory: .
+        package-name: github-actions-test-repo
+        version: ${{ github.event.inputs.version }}
 
-    - name: Publish npm package
-      env:
-        NPM_CONFIG_USERCONFIG: .npmrc.ci
-        NODE_AUTH_TOKEN: ${{ github.token }}
-      run: npm publish --no-git-tag-version
+
+    # - name: Add git config user.name
+    #   run: |
+    #     git config user.name "github-actions[bot]"
+    #     git config user.email "github-actions[bot]@users.noreply.github.com"
+    
+    # - name: Bump version
+    #   run: npm version ${{ inputs.version }}
+
+    # - name: Push new version
+    #   run: |
+    #     git push
+    #     git push --tags
+
+    # - name: Publish npm package
+    #   env:
+    #     NPM_CONFIG_USERCONFIG: .npmrc.ci
+    #     NODE_AUTH_TOKEN: ${{ github.token }}
+    #   run: npm publish --no-git-tag-version

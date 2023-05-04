@@ -1,0 +1,47 @@
+name: 'Git helper composite action'
+
+inputs:
+  working-directory:
+    required: true
+  version:
+    description: 'Bump version (major | minor | patch | alpha)'
+    required: true
+    default: 'patch'
+
+runs:
+  using: "composite"
+  steps:
+
+  - name: Add git config user.name
+    shell: bash
+    run: |
+      git config user.name "github-actions[bot]"
+      git config user.email "github-actions[bot]@users.noreply.github.com"
+  
+  - name: Bump version
+    shell: bash
+    working-directory: ${{ inputs.working-directory }}
+    if: inputs.version != 'alpha'
+    run: npm version ${{ inputs.version }}
+
+  - name: Bump alpha version
+    shell: bash
+    working-directory: ${{ inputs.working-directory }}
+    if: inputs.version == 'alpha'
+    run: npm version prerelease --preid=alpha
+
+  - name: Push new version
+    shell: bash
+    working-directory: ${{ inputs.working-directory }}
+    run: |
+      git push
+      git push --tags
+
+  - name: Publish npm package
+    shell: bash
+    working-directory: ${{ inputs.working-directory }}
+    env:
+      NPM_CONFIG_USERCONFIG: .npmrc.ci
+      NODE_AUTH_TOKEN: ${{ github.token }}
+    run: |
+      npm publish --no-git-tag-version
