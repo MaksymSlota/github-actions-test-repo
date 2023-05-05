@@ -10,10 +10,6 @@
     "test": "jest",
     "lint": "eslint . && tsc --pretty --noEmit"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/MaksymSlota/github-actions-test-repo.git"
-  },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/maksymslota"
   },
