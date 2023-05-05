@@ -15,6 +15,7 @@ runs:
   - name: Add git config user.name
     shell: bash
     run: |
+      git pull
       git config user.name "github-actions[bot]"
       git config user.email "github-actions[bot]@users.noreply.github.com"
   
