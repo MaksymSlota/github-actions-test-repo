@@ -21,25 +21,30 @@ jobs:
 
     - name: Build
       run: npm run build
+
+    - name: Commit and publish new version
+      uses: ./.github/actions/git-helper
+      with:
+        working-directory: .
+        package-name: github-actions-test-repo
+        version: ${{ github.event.inputs.version }}
+
+
+    # - name: Add git config user.name
+    #   run: |
+    #     git config user.name "github-actions[bot]"
+    #     git config user.email "github-actions[bot]@users.noreply.github.com"
     
-    - name: Config git user
-      run: |
-        git config user.name "github-actions[bot]"
-        git config user.email "github-actions[bot]@users.noreply.github.com"
+    # - name: Bump version
+    #   run: npm version ${{ inputs.version }}
 
-    - name: Commit and push version
-      run: |
-        git pull
-        echo "NEW_VERSION=$(npm version ${{ inputs.version }})" >> $GITHUB_ENV
-        git add package.json
-        git add package-lock.json
-        git commit -m "[skip ci] Update package github-actions-test-repo@${{ env.NEW_VERSION }}"
-        git push
-        git tag github-actions-test-repo/${{ env.NEW_VERSION }}
-        git push --tags
+    # - name: Push new version
+    #   run: |
+    #     git push
+    #     git push --tags
 
-    - name: Publish npm package
-      env:
-        NPM_CONFIG_USERCONFIG: .npmrc.ci
-        NODE_AUTH_TOKEN: ${{ github.token }}
-      run: npm publish --no-git-tag-version
+    # - name: Publish npm package
+    #   env:
+    #     NPM_CONFIG_USERCONFIG: .npmrc.ci
+    #     NODE_AUTH_TOKEN: ${{ github.token }}
+    #   run: npm publish --no-git-tag-version

@@ -1,6 +1,6 @@
 {
   "name": "@maksymslota/github-actions-test-repo",
-  "version": "1.0.5",
+  "version": "1.1.10",
   "description": "Repo to test github actions",
   "main": "dist/index.js",
   "type": "commonjs",
@@ -9,10 +9,6 @@
     "build": "tsc",
     "test": "jest",
     "lint": "eslint . && tsc --pretty --noEmit"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/MaksymSlota/github-actions-test-repo.git"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/maksymslota"
