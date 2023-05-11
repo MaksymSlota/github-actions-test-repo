@@ -1,4 +1,4 @@
-name: Release
+name: Release with direct job
 
 on:
   workflow_dispatch:
@@ -21,6 +21,7 @@ jobs:
   deploy1:
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v3
     - name: Add git config user.name
       run: |
         git pull
