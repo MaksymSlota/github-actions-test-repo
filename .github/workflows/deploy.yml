@@ -25,7 +25,7 @@ jobs:
     - name: Commit and publish new version
       uses: ./.github/actions/git-helper
       with:
-        working-directory: .
+        working-directory: js
         package-name: github-actions-test-repo
         version: ${{ github.event.inputs.version }}
 
