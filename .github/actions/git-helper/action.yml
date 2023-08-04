@@ -42,9 +42,9 @@ runs:
     working-directory: ${{ inputs.working-directory }}
     run: |
       git add package*.json
-      git commit -m "[skip ci] Update package ${{ inputs.package-name }}@${{ env.NEW_VERSION }}"
+      git commit -m "[skip ci] Update package ${{ inputs.working-directory }}@${{ env.NEW_VERSION }}"
       git push
-      git tag ${{ inputs.package-name }}/${{ env.NEW_VERSION }}
+      git tag ${{ inputs.working-directory }}/${{ env.NEW_VERSION }}
       git push --tags
 
   # - name: Push new version
