@@ -36,6 +36,11 @@ runs:
     run: |
       echo "NEW_VERSION=$(npm version prerelease --preid=alpha)" >> $GITHUB_ENV
 
+  - name: Create release branch
+    shell: bash
+    working-directory: ${{ inputs.working-directory }}
+    run: |
+      git checkout -b release/${{ env.NEW_VERSION }} && git push origin release/${{ env.NEW_VERSION }} || git checkout release/${{ env.NEW_VERSION }}
 
   - name: Commit and push new version
     shell: bash
