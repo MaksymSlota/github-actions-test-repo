@@ -3,6 +3,9 @@ name: Deploy
 on:
   workflow_call:
     inputs:
+      working-directory:
+        type: string
+        required: true
       version:
         description: 'Bump version (major | minor | patch)'
         required: true
@@ -25,13 +28,6 @@ jobs:
     - name: Commit and publish new version
       uses: ./.github/actions/git-helper
       with:
-        working-directory: js
+        working-directory: ${{ inputs.working-directory }}
         package-name: github-actions-test-repo
-        version: ${{ github.event.inputs.version }}
-
-    - name: Commit and publish new version WASM
-      uses: ./.github/actions/git-helper
-      with:
-        working-directory: wasm
-        package-name: github-actions-test-repo
-        version: ${{ github.event.inputs.version }}
+        version: ${{ inputs.version }}

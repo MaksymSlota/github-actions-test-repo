@@ -18,11 +18,19 @@ jobs:
   test:
     needs: [check-style]
     uses: ./.github/workflows/test.yml
-  deploy1:
-      #needs: [build, test]
+
+  deploy-wasm:
       uses: ./.github/workflows/deploy.yml
       with:
+        working-directory: wasm
         version: ${{ github.event.inputs.version }}
+  
+  deploy-js:
+    needs: [deploy-wasm]
+    uses: ./.github/workflows/deploy.yml
+    with:
+      working-directory: js
+      version: ${{ github.event.inputs.version }}
 
   # deploy2:
   #   needs: [deploy1]
