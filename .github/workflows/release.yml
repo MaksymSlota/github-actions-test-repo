@@ -24,9 +24,8 @@ jobs:
       with:
         version: ${{ github.event.inputs.version }}
 
-  deploy2:
-    needs: [deploy1]
-    uses: ./.github/workflows/deploy.yml
-    with:
-      version: 'alpha'
-      
+  # deploy2:
+  #   needs: [deploy1]
+  #   uses: ./.github/workflows/deploy.yml
+  #   with:
+  #     version: ${{ github.event.inputs.version }}

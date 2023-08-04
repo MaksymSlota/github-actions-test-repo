@@ -29,22 +29,9 @@ jobs:
         package-name: github-actions-test-repo
         version: ${{ github.event.inputs.version }}
 
-
-    # - name: Add git config user.name
-    #   run: |
-    #     git config user.name "github-actions[bot]"
-    #     git config user.email "github-actions[bot]@users.noreply.github.com"
-    
-    # - name: Bump version
-    #   run: npm version ${{ inputs.version }}
-
-    # - name: Push new version
-    #   run: |
-    #     git push
-    #     git push --tags
-
-    # - name: Publish npm package
-    #   env:
-    #     NPM_CONFIG_USERCONFIG: .npmrc.ci
-    #     NODE_AUTH_TOKEN: ${{ github.token }}
-    #   run: npm publish --no-git-tag-version
+    - name: Commit and publish new version WASM
+      uses: ./.github/actions/git-helper
+      with:
+        working-directory: wasm
+        package-name: github-actions-test-repo
+        version: ${{ github.event.inputs.version }}
