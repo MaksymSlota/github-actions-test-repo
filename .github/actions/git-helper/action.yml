@@ -38,11 +38,11 @@ runs:
       git push
       git push --tags
 
-  - name: Publish npm package
-    shell: bash
-    working-directory: ${{ inputs.working-directory }}
-    env:
-      NPM_CONFIG_USERCONFIG: .npmrc.ci
-      NODE_AUTH_TOKEN: ${{ github.token }}
-    run: |
-      npm publish --no-git-tag-version
+  # - name: Publish npm package
+  #   shell: bash
+  #   working-directory: ${{ inputs.working-directory }}
+  #   env:
+  #     NPM_CONFIG_USERCONFIG: .npmrc.ci
+  #     NODE_AUTH_TOKEN: ${{ github.token }}
+  #   run: |
+  #     npm publish --no-git-tag-version
