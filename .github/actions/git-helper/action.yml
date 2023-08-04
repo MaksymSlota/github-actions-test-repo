@@ -46,7 +46,7 @@ runs:
     shell: bash
     working-directory: ${{ inputs.working-directory }}
     run: |
-      git checkout -b release/${{ env.NEW_VERSION }} && git push --set-upstream origin release/${{ env.NEW_VERSION }} || git checkout release/${{ env.NEW_VERSION }}
+      git checkout -b release/${{ env.NEW_VERSION }} && git push --set-upstream origin release/${{ env.NEW_VERSION }} || git checkout origin/release/${{ env.NEW_VERSION }}
 
   - name: Commit and push new version to the release branch
     if: ${{ inputs.create-relase-branch }}
@@ -55,7 +55,7 @@ runs:
     run: |
       git add package*.json
       git commit -m "[skip ci] Update package ${{ inputs.working-directory }}@${{ env.NEW_VERSION }}"
-      git push --set-upstream origin release/${{ env.NEW_VERSION }}
+      git push origin release/${{ env.NEW_VERSION }}
       git tag ${{ inputs.working-directory }}/${{ env.NEW_VERSION }}
       git push --tags
 
