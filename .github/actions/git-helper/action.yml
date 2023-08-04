@@ -12,10 +12,13 @@ runs:
   using: "composite"
   steps:
 
-  - name: Add git config user.name
+ - name: Git pull
+    shell: bash
+    run: git pull
+
+  - name: Add github-actions user to git config
     shell: bash
     run: |
-      git pull
       git config user.name "github-actions[bot]"
       git config user.email "github-actions[bot]@users.noreply.github.com"
   
@@ -23,20 +26,33 @@ runs:
     shell: bash
     working-directory: ${{ inputs.working-directory }}
     if: inputs.version != 'alpha'
-    run: npm version ${{ inputs.version }}
+    run: |
+      echo "NEW_VERSION=$(npm version ${{ inputs.version }})" >> $GITHUB_ENV
 
   - name: Bump alpha version
     shell: bash
     working-directory: ${{ inputs.working-directory }}
     if: inputs.version == 'alpha'
-    run: npm version prerelease --preid=alpha
+    run: |
+      echo "NEW_VERSION=$(npm version prerelease --preid=alpha)" >> $GITHUB_ENV
 
-  - name: Push new version
+
+  - name: Commit and push new version
     shell: bash
     working-directory: ${{ inputs.working-directory }}
     run: |
+      git add package*.json
+      git commit -m "[skip ci] Update package ${{ inputs.package-name }}@${{ env.NEW_VERSION }}"
       git push
+      git tag ${{ inputs.package-name }}/${{ env.NEW_VERSION }}
       git push --tags
+
+  # - name: Push new version
+  #   shell: bash
+  #   working-directory: ${{ inputs.working-directory }}
+  #   run: |
+  #     git push
+  #     git push --tags
 
   # - name: Publish npm package
   #   shell: bash
