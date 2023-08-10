@@ -69,10 +69,6 @@ runs:
       git tag ${{ inputs.working-directory }}/${{ env.NEW_VERSION }}
       git push --tags
 
-  - name: Create Pull Request for Release branch
-      if: ${{ inputs.create-relase-branch }}
-      uses: peter-evans/create-pull-request@v5
-      
   # - name: Publish npm package
   #   shell: bash
   #   working-directory: ${{ inputs.working-directory }}
