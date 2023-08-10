@@ -36,6 +36,6 @@ jobs:
       uses: ./.github/actions/git-helper
       with:
         working-directory: ${{ inputs.working-directory }}
-        package-name: github-actions-test-repo
+        package-name: ${{ inputs.package-name }}
         version: ${{ inputs.version }}
         create-release-branch: ${{ inputs.create-release-branch }}
