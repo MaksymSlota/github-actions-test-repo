@@ -10,8 +10,7 @@ inputs:
   create-release-branch:
       description: 'Automaticaly create a release branch (e.g. release/1.2.3)'
       type: boolean
-      required: false
-      default: true
+      required: true
 
 runs:
   using: "composite"

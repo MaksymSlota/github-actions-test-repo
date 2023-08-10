@@ -8,6 +8,11 @@ on:
         required: true
         default: 'patch'
         type: string
+      create-release-branch:
+        description: 'Automaticaly create a release branch (e.g. release/1.2.3)'
+        type: boolean
+        required: false
+        default: true
 
 jobs:
   check-style:
@@ -24,6 +29,7 @@ jobs:
       with:
         working-directory: wasm
         version: ${{ github.event.inputs.version }}
+        create-release-branch: ${{ github.event.inputs.create-release-branch }}
   
   deploy-js:
     needs: [deploy-wasm]
@@ -31,8 +37,8 @@ jobs:
     with:
       working-directory: js
       version: ${{ github.event.inputs.version }}
+      create-release-branch: ${{ github.event.inputs.create-release-branch }}
 
-  
   create-pull-request:
     runs-on: ubuntu-latest
     needs: [deploy-wasm, deploy-js]

@@ -11,6 +11,11 @@ on:
         required: true
         default: 'patch'
         type: string
+      create-release-branch:
+        description: 'Automaticaly create a release branch (e.g. release/1.2.3)'
+        type: boolean
+        required: false
+        default: true
 
 jobs:
   deploy:
@@ -31,3 +36,4 @@ jobs:
         working-directory: ${{ inputs.working-directory }}
         package-name: github-actions-test-repo
         version: ${{ inputs.version }}
+        create-release-branch: ${{ inputs.create-release-branch }}
