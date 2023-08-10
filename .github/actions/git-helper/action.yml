@@ -8,9 +8,9 @@ inputs:
     required: true
     default: 'patch'
   create-release-branch:
-      description: 'Automaticaly create a release branch (e.g. release/1.2.3)'
-      type: boolean
-      required: true
+    description: 'Automaticaly create a release branch (e.g. release/1.2.3)'
+    type: boolean
+    required: true
 
 runs:
   using: "composite"

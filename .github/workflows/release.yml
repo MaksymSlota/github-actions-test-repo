@@ -47,9 +47,3 @@ jobs:
 
     - name: Create Pull Request for Release branch
       uses: peter-evans/create-pull-request@v5
-
-  # deploy2:
-  #   needs: [deploy1]
-  #   uses: ./.github/workflows/deploy.yml
-  #   with:
-  #     version: ${{ github.event.inputs.version }}
