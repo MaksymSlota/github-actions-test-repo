@@ -6,6 +6,9 @@ on:
       working-directory:
         type: string
         required: true
+      package-name:
+        type: string
+        reqired: true
       version:
         description: 'Bump version (major | minor | patch)'
         required: true

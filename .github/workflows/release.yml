@@ -28,16 +28,18 @@ jobs:
     uses: ./.github/workflows/deploy.yml
     with:
       working-directory: wasm
+      package-name: wasm
       version: ${{ github.event.inputs.version }}
       create-release-branch: ${{ github.event.inputs.create-release-branch }}
   
-  # deploy-js:
-  #   needs: [deploy-wasm]
-  #   uses: ./.github/workflows/deploy.yml
-  #   with:
-  #     working-directory: js
-  #     version: ${{ github.event.inputs.version }}
-  #     create-release-branch: ${{ github.event.inputs.create-release-branch }}
+  deploy-js:
+    needs: [deploy-wasm]
+    uses: ./.github/workflows/deploy.yml
+    with:
+      working-directory: js
+      package-name: js
+      version: ${{ github.event.inputs.version }}
+      create-release-branch: ${{ github.event.inputs.create-release-branch }}
 
   # create-pull-request:
   #   runs-on: ubuntu-latest
