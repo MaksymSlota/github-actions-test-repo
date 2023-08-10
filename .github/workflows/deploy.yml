@@ -8,7 +8,7 @@ on:
         required: true
       package-name:
         type: string
-        reqired: true
+        required: true
       version:
         description: 'Bump version (major | minor | patch)'
         required: true
