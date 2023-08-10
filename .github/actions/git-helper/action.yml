@@ -3,19 +3,28 @@ name: 'Git helper composite action'
 inputs:
   working-directory:
     required: true
+  package-name:
+    reqired: true
   version:
     description: 'Bump version (major | minor | patch | alpha)'
     required: true
     default: 'patch'
+  create-release-branch:
+    description: 'Automaticaly create a release branch (e.g. release/1.2.3)'
+    type: boolean
+    required: true
 
 runs:
   using: "composite"
   steps:
 
-  - name: Add git config user.name
+  - name: Git pull
+    shell: bash
+    run: git pull
+
+  - name: Add github-actions user to git config
     shell: bash
     run: |
-      git pull
       git config user.name "github-actions[bot]"
       git config user.email "github-actions[bot]@users.noreply.github.com"
   
@@ -23,26 +32,39 @@ runs:
     shell: bash
     working-directory: ${{ inputs.working-directory }}
     if: inputs.version != 'alpha'
-    run: npm version ${{ inputs.version }}
+    run: |
+      echo "NEW_VERSION=$(npm version ${{ inputs.version }})" >> $GITHUB_ENV
 
   - name: Bump alpha version
     shell: bash
     working-directory: ${{ inputs.working-directory }}
     if: inputs.version == 'alpha'
-    run: npm version prerelease --preid=alpha
+    run: |
+      echo "NEW_VERSION=$(npm version prerelease --preid=alpha)" >> $GITHUB_ENV
 
-  - name: Push new version
+  - name: Create release branch
+    #if: ${{ inputs.create-relase-branch }}
     shell: bash
     working-directory: ${{ inputs.working-directory }}
     run: |
+      echo "Create release branch"
+      git switch -c release/${{ env.NEW_VERSION }} origin/release/${{ env.NEW_VERSION }} || git checkout -b release/${{ env.NEW_VERSION }} && git push --set-upstream origin release/${{ env.NEW_VERSION }}
+
+  - name: Commit and push new version
+    shell: bash
+    working-directory: ${{ inputs.working-directory }}
+    run: |
+      git add package*.json
+      git commit -m "[skip ci] Update package ${{ inputs.package-name }}@${{ env.NEW_VERSION }}"
       git push
+      git tag ${{ inputs.package-name }}/${{ env.NEW_VERSION }}
       git push --tags
 
-  - name: Publish npm package
-    shell: bash
-    working-directory: ${{ inputs.working-directory }}
-    env:
-      NPM_CONFIG_USERCONFIG: .npmrc.ci
-      NODE_AUTH_TOKEN: ${{ github.token }}
-    run: |
-      npm publish --no-git-tag-version
+  # - name: Publish npm package
+  #   shell: bash
+  #   working-directory: ${{ inputs.working-directory }}
+  #   env:
+  #     NPM_CONFIG_USERCONFIG: .npmrc.ci
+  #     NODE_AUTH_TOKEN: ${{ github.token }}
+  #   run: |
+  #     npm publish --no-git-tag-version

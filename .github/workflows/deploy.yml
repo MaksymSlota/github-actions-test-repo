@@ -3,11 +3,21 @@ name: Deploy
 on:
   workflow_call:
     inputs:
+      working-directory:
+        type: string
+        required: true
+      package-name:
+        type: string
+        required: true
       version:
         description: 'Bump version (major | minor | patch)'
         required: true
         default: 'patch'
         type: string
+      create-release-branch:
+        description: 'Automaticaly create a release branch (e.g. release/1.2.3)'
+        type: string
+        required: true
 
 jobs:
   deploy:
@@ -25,26 +35,7 @@ jobs:
     - name: Commit and publish new version
       uses: ./.github/actions/git-helper
       with:
-        working-directory: .
-        package-name: github-actions-test-repo
-        version: ${{ github.event.inputs.version }}
-
-
-    # - name: Add git config user.name
-    #   run: |
-    #     git config user.name "github-actions[bot]"
-    #     git config user.email "github-actions[bot]@users.noreply.github.com"
-    
-    # - name: Bump version
-    #   run: npm version ${{ inputs.version }}
-
-    # - name: Push new version
-    #   run: |
-    #     git push
-    #     git push --tags
-
-    # - name: Publish npm package
-    #   env:
-    #     NPM_CONFIG_USERCONFIG: .npmrc.ci
-    #     NODE_AUTH_TOKEN: ${{ github.token }}
-    #   run: npm publish --no-git-tag-version
+        working-directory: ${{ inputs.working-directory }}
+        package-name: ${{ inputs.package-name }}
+        version: ${{ inputs.version }}
+        create-release-branch: ${{ inputs.create-release-branch }}

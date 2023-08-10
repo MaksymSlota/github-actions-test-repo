@@ -8,6 +8,11 @@ on:
         required: true
         default: 'patch'
         type: string
+      create-release-branch:
+        description: 'Automaticaly create a release branch (e.g. release/1.2.3)'
+        type: boolean
+        required: false
+        default: true
 
 jobs:
   check-style:
@@ -18,15 +23,20 @@ jobs:
   test:
     needs: [check-style]
     uses: ./.github/workflows/test.yml
-  deploy1:
-      #needs: [build, test]
-      uses: ./.github/workflows/deploy.yml
-      with:
-        version: ${{ github.event.inputs.version }}
 
-  deploy2:
-    needs: [deploy1]
+  deploy-wasm:
     uses: ./.github/workflows/deploy.yml
     with:
-      version: 'alpha'
-      
+      working-directory: wasm
+      package-name: wasm
+      version: ${{ github.event.inputs.version }}
+      create-release-branch: ${{ github.event.inputs.create-release-branch }}
+  
+  deploy-js:
+    needs: [deploy-wasm]
+    uses: ./.github/workflows/deploy.yml
+    with:
+      working-directory: js
+      package-name: js
+      version: ${{ github.event.inputs.version }}
+      create-release-branch: ${{ github.event.inputs.create-release-branch }}
