@@ -17,8 +17,8 @@ jobs:
 
       - name: Create commits
         run: |
-          git config user.name 'Peter Evans'
-          git config user.email 'peter-evans@users.noreply.github.com'
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
           date +%s > report.txt
           git commit -am "Modify tracked file during workflow"
           date +%s > new-report.txt
