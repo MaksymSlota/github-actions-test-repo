@@ -48,14 +48,7 @@ runs:
     working-directory: ${{ inputs.working-directory }}
     run: |
       echo "Create release branch"
-      git checkout -b release/${{ env.NEW_VERSION }} && git push --set-upstream origin release/${{ env.NEW_VERSION }} || git checkout origin/release/${{ env.NEW_VERSION }}
-
-- name: Create release branch
-    if: ${{ inputs.create-relase-branch }}
-    shell: bash
-    working-directory: ${{ inputs.working-directory }}
-    run: |
-      git checkout -b release/${{ env.NEW_VERSION }} && git push --set-upstream origin release/${{ env.NEW_VERSION }} || git checkout origin/release/${{ env.NEW_VERSION }}
+      git switch -c release/${{ env.NEW_VERSION }} origin/release/${{ env.NEW_VERSION }} || git checkout -b release/${{ env.NEW_VERSION }} && git push --set-upstream origin release/${{ env.NEW_VERSION }}
 
   - name: Commit and push new version
     shell: bash
