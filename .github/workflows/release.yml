@@ -47,3 +47,7 @@ jobs:
 
     - name: Create Pull Request for Release branch
       uses: peter-evans/create-pull-request@v5
+      with:
+        title: Release
+        body: Update package.json release changes
+        base: main
