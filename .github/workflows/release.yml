@@ -24,12 +24,12 @@ jobs:
   #   needs: [check-style]
   #   uses: ./.github/workflows/test.yml
 
-  # deploy-wasm:
-  #   uses: ./.github/workflows/deploy.yml
-  #   with:
-  #     working-directory: wasm
-  #     version: ${{ github.event.inputs.version }}
-  #     create-release-branch: ${{ github.event.inputs.create-release-branch }}
+  deploy-wasm:
+    uses: ./.github/workflows/deploy.yml
+    with:
+      working-directory: wasm
+      version: ${{ github.event.inputs.version }}
+      create-release-branch: ${{ github.event.inputs.create-release-branch }}
   
   # deploy-js:
   #   needs: [deploy-wasm]
@@ -41,7 +41,7 @@ jobs:
 
   create-pull-request:
     runs-on: ubuntu-latest
-    #needs: [deploy-wasm]
+    needs: [deploy-wasm]
     steps:
     - uses: actions/checkout@v3
 
@@ -50,5 +50,5 @@ jobs:
       with:
         title: Release
         body: Update package.json release changes
-        branch: release/1.2.5
+        branch: release/v1.2.5
         base: main
