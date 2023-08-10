@@ -37,6 +37,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: [deploy-wasm, deploy-js]
     steps:
+    - uses: actions/checkout@v3
+
     - name: Create Pull Request for Release branch
       uses: peter-evans/create-pull-request@v5
 
