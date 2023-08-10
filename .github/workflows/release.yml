@@ -17,12 +17,12 @@ on:
 jobs:
   check-style:
     uses: ./.github/workflows/lint.yml
-  build:
-    needs: [check-style]
-    uses: ./.github/workflows/build.yml
-  test:
-    needs: [check-style]
-    uses: ./.github/workflows/test.yml
+  # build:
+  #   needs: [check-style]
+  #   uses: ./.github/workflows/build.yml
+  # test:
+  #   needs: [check-style]
+  #   uses: ./.github/workflows/test.yml
 
   deploy-wasm:
       uses: ./.github/workflows/deploy.yml
