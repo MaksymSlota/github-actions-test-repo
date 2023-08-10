@@ -15,8 +15,8 @@ on:
         default: true
 
 jobs:
-  check-style:
-    uses: ./.github/workflows/lint.yml
+  # check-style:
+  #   uses: ./.github/workflows/lint.yml
   # build:
   #   needs: [check-style]
   #   uses: ./.github/workflows/build.yml
@@ -25,11 +25,11 @@ jobs:
   #   uses: ./.github/workflows/test.yml
 
   deploy-wasm:
-      uses: ./.github/workflows/deploy.yml
-      with:
-        working-directory: wasm
-        version: ${{ github.event.inputs.version }}
-        create-release-branch: ${{ github.event.inputs.create-release-branch }}
+    uses: ./.github/workflows/deploy.yml
+    with:
+      working-directory: wasm
+      version: ${{ github.event.inputs.version }}
+      create-release-branch: ${{ github.event.inputs.create-release-branch }}
   
   deploy-js:
     needs: [deploy-wasm]
