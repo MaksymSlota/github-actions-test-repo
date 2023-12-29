@@ -1,0 +1,27 @@
+name: "[Engine] Build"
+
+on:
+  pull_request:
+
+jobs:
+  check_code_style:
+    name: Check Code style in changed files
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Get changed files
+      id: changed-files
+      uses: tj-actions/changed-files@v41
+      with:
+        base_sha: "${{ steps.base-sha.outputs.sha }}"
+    
+    - name: List all changed files
+      env:
+        ALL_CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
+      run: |
+        for file in "$ALL_CHANGED_FILES"; do
+          echo "$file was changed"
+        done
