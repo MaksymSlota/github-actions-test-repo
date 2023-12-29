@@ -31,9 +31,11 @@ jobs:
           mkdir -p ${{ github.workspace }}/check-files
           cp -r ${{ steps.changed-files.outputs.all_changed_files }} ${{ github.workspace }}/check-files/
 
-    - name: Run clang-format style check.
-      uses: jidicula/clang-format-action@v4.11.0
-      with:
-        clang-format-version: '15'
-        check-path: ${{ github.workspace }}/check-files
-        fallback-style: 'Microsoft'
+    - name: Install clang-format-15
+      run: |
+           sudo apt update
+           sudo apt install clang-format-15    
+
+    - name: Check cpp style
+      working-directory: ${{ github.workspace }}/check-files
+      run: find . -iname *.cpp -o -iname *.hpp | xargs clang-format-15 --style=microsoft --dry-run -Werror
