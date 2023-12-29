@@ -1,7 +1,8 @@
-// hello-world.cpp
-#include <iostream>
+// main.cpp
 
-int main(){
-    std::cout << "Hello, World!" << std::endl;
+#include "temp.hpp"
+
+int main() {
+    printHello();
     return 0;
 }
