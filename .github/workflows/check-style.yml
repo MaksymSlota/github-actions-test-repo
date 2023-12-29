@@ -25,3 +25,15 @@ jobs:
         for file in "$ALL_CHANGED_FILES"; do
           echo "$file was changed"
         done
+    
+    - name: Copy all changed files to temp folder
+      run: |
+          mkdir -p ${{ github.workspace }}/check-files
+          cp -r ${{ steps.changed-files.outputs.all_changed_files }} ${{ github.workspace }}/check-files/
+
+    - name: Run clang-format style check.
+      uses: jidicula/clang-format-action@v4.11.0
+      with:
+        clang-format-version: '15'
+        check-path: ${{ github.workspace }}/check-files
+        fallback-style: 'Microsoft'
