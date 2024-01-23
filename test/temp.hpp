@@ -7,7 +7,4 @@
 
 void printHello();
 
-// void printHello();
-
-
 #endif
