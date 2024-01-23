@@ -2,7 +2,7 @@
 
 #include "temp.hpp"
 
-int main() {
-    printHello();
-    return 0;
+int main(){
+	printHello();
+	return 0;
 }
