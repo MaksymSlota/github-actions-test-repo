@@ -1,7 +1,7 @@
 name: Upload Artifacts
 
 on:
-    workflow_call:
+    workflow_dispatch:
 
 env:
   ARTIFACTS_ROOT_DIR: ${{ github.workspace }}\test-artifacts
