@@ -29,21 +29,20 @@ jobs:
         if-no-files-found: error
         retention-days: 1
 
-    download-artifacts:
-      name: Download artifacts
-      runs-on: windows-2022
+  download-artifacts:
+    name: Download artifacts
+    runs-on: windows-2022
   
-      steps:
-      - uses: actions/checkout@v4
-  
-      # Download
-      - name: Downlaod artifact
-        uses: actions/download-artifact@v4
-        with:
-          path: build
-          pattern: cpu-*
-          merge-multiple: true
+    steps:
+    - uses: actions/checkout@v4
 
-      - name: List downloaded iOS artifacts
-        run: ls -R build
-  
+    # Download
+    - name: Downlaod artifact
+      uses: actions/download-artifact@v4
+      with:
+        path: build
+        pattern: cpu-*
+        merge-multiple: true
+
+    - name: List downloaded iOS artifacts
+      run: ls -R build
