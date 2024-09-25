@@ -1,0 +1,49 @@
+name: Upload Artifacts v4
+
+on:
+    workflow_dispatch:
+
+env:
+  ARTIFACTS_ROOT_DIR: ${{ github.workspace }}\temp-artifacts-src
+
+jobs:
+  upload-artifacts:
+    name: Upload artifacts
+    runs-on: windows-2022
+    strategy:
+      matrix:
+        profile:
+          - name: cpu-x64
+          - name: cpu-x86
+          - name: cpu-arm
+
+    steps:
+    - uses: actions/checkout@v4
+
+    # Upload
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ matrix.profile }}-build
+        path: temp-artifacts-src/${{ matrix.profile }}
+        if-no-files-found: error
+        retention-days: 1
+
+    download-artifacts:
+      name: Download artifacts
+      runs-on: windows-2022
+  
+      steps:
+      - uses: actions/checkout@v4
+  
+      # Download
+      - name: Downlaod artifact
+        uses: actions/download-artifact@v4
+        with:
+          path: build
+          pattern: cpu-*
+          merge-multiple: true
+
+      - name: List downloaded iOS artifacts
+        run: ls -R build
+  
