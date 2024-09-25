@@ -1,4 +1,4 @@
-name: Upload Artifacts v4
+name: Testing Artifacts v4
 
 on:
     workflow_dispatch:
