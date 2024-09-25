@@ -12,10 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        profile:
-          - name: cpu-x64
-          - name: cpu-x86
-          - name: cpu-arm
+        profile: [cpu-x64, cpu-x86, cpu-arm]
 
     steps:
     - uses: actions/checkout@v4
