@@ -9,7 +9,7 @@ env:
 jobs:
   upload-artifacts:
     name: Upload artifacts
-    runs-on: windows-2022
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         profile:
@@ -31,7 +31,8 @@ jobs:
 
   download-artifacts:
     name: Download artifacts
-    runs-on: windows-2022
+    runs-on: ubuntu-latest
+    needs: [upload-artifacts]
   
     steps:
     - uses: actions/checkout@v4
